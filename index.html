@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Game</title>
+</head>
+<body>
+    <h1>Clicker Game</h1>
+    <button 
+    id="clicker-button"
+    hx-post="/click"
+    hx-trigger="click"
+    hx-swap="innerHTML"
+    >Click Me!</button>
+    <p><span id="points">0</span></p>
+
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <script>
+        document.getElementById('clicker-button').addEventListener('htmx:afterRequest', function(evt) {
+            document.getElementById('points').textContent = evt.detail.xhr.responseText;
+        });
+    </script>
+</body>
+</html>
